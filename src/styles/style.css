@@ -1,0 +1,17 @@
+:root {
+  /*Declares colors with red palette */
+  --darkest: #450a0a;
+  --secondDarkest: #7f1d1d;
+  --thirdDarkest: #991b1b;
+  --darker: #dc2626;
+  --mid: #ef4444;
+  --light: #f87171;
+  --lighter: #fca5a5;
+  --thirdLightest: #fecaca;
+  --secondLightest: #fee2e2;
+  --lightest: #fef2f2;
+}
+
+*{
+  background-color: var(--mid);
+}
