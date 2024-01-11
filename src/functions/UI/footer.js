@@ -6,12 +6,12 @@ const footer = function(){
 
     const h4 = document.createElement('h4');
     footer.appendChild(h4);
-    h4.textContent = 'Powered by: '
+    h4.textContent = 'Powered by:  '
 
     const linkGit = document.createElement('a')
     footer.appendChild(linkGit);
     linkGit.href = "https://github.com/sacifuentespa"
-    linkGit.textContent = "Santiago Cifuentes"
+    linkGit.textContent = "Santiago Cifuentes "
 
     const icon = new Image();
     icon.src = Git;
