@@ -1,19 +1,18 @@
-import { projects, Project, createProject, addTaskToProject } from './../functionalities/addProjectFunctionality.js';
+import { createProject } from '../functionalities/projectController.js';
+import showProject from './showProject.js';
 
-const projectForm = function(){
+const projectForm = function () {
     const sidebarDiv = document.querySelector('.sidebarDiv');
     const addProjectDialog = document.createElement('dialog')
     const addProjectForm = document.createElement('form');
     const inputNameProject = document.createElement('input');
     const projectAddButtonFinal = document.createElement('button');
     const cancelProjectAdditionButton = document.createElement('button');
-    const addTaskButton = document.querySelector('#buttonAddTask');  
+    const addTaskButton = document.querySelector('#buttonAddTask');
 
-    console.log(addTaskButton);
-    console.log(addProjectDialog);
 
     addProjectDialog.id = "dialogAddProject"
-    
+
     addProjectDialog.appendChild(addProjectForm);
 
     addProjectForm.id = "addProjectForm";
@@ -34,23 +33,26 @@ const projectForm = function(){
 
     addProjectForm.appendChild(projectAddButtonFinal);
     addProjectForm.appendChild(cancelProjectAdditionButton);
-    
+
     sidebarDiv.insertBefore(addProjectDialog, addTaskButton);
     addProjectDialog.showModal();
 
-    cancelProjectAdditionButton.addEventListener('click',() => {
+    cancelProjectAdditionButton.addEventListener('click', () => {
         addProjectDialog.close();
     })
 
-    projectAddButtonFinal.addEventListener('click', (e)=>{
+    projectAddButtonFinal.addEventListener('click', (e) => {
         e.preventDefault();
         createProject(inputNameProject.value);
 
 
         const buttonProject = document.createElement('button');
         buttonProject.textContent = inputNameProject.value;
+        buttonProject.id = inputNameProject.value;
+
         sidebarDiv.appendChild(buttonProject);
-        
+        buttonProject.addEventListener('click', () => showProject(buttonProject.id));
+
         addProjectForm.reset();
         addProjectDialog.close();
     }

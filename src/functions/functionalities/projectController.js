@@ -16,5 +16,7 @@ function addTaskToProject(project, task) {
     project.projectTasks.push(task);
 }
 
+createProject("General Project");
+
 
 module.exports = {projects, Project, createProject, addTaskToProject}
