@@ -56,6 +56,10 @@ const main = function(){
         buttonElement.id = `button${button.id}`
     })
     
+    const titleProject = document.createElement('h3');
+    titleProject.textContent = 'Projects';
+    sidebarDiv.appendChild(titleProject);
+
     const mainContent = document.createElement('div');
     mainContent.classList.add('mainContent');
 
