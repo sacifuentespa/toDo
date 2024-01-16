@@ -15,7 +15,7 @@ const taskForm = function () {
     const cancelTaskAdditionButton = document.createElement('button');
     const addTaskButton = document.querySelector('#buttonAddTask');
 
-    
+
 
     addTaskDialog.id = "dialogAddTask"
 
@@ -66,7 +66,7 @@ const taskForm = function () {
     addTaskForm.appendChild(inputTaskPriority);
 
     if (projects.length > 1) {
-        
+
         projects = loadDataFromLocalStorage();
         const labelProjectOption = document.createElement('label');
         addTaskForm.appendChild(labelProjectOption);
@@ -82,7 +82,7 @@ const taskForm = function () {
             optionProject.textContent = projects[i].name;
             projectSelect.appendChild(optionProject);
         }
-       
+
         // to add the general project to the options
         const optionProject = document.createElement('option');
         optionProject.value = projects[0].name;
@@ -90,6 +90,9 @@ const taskForm = function () {
         projectSelect.appendChild(optionProject);
         addTaskForm.appendChild(projectSelect);
     }
+
+    inputTaskDueDate.type = "date";
+    addTaskForm.appendChild(inputTaskDueDate)
 
     taskAddButtonFinal.type = "submit";
     taskAddButtonFinal.textContent = "Add";
@@ -113,15 +116,23 @@ const taskForm = function () {
         projects = loadDataFromLocalStorage();
         // here comes the specific logic for tasks
         const projectSelect = document.querySelector('#projectOption');
-        const taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value);
-        
-        if(projectSelect){
-            addTaskToProject(projectSelect.value, taskToAdd);
-        }else{
-            addTaskToProject(undefined,taskToAdd);
+        let taskToAdd = '';
+
+        if (inputTaskDueDate.value) {
+            const dueDate = new Date(inputTaskDueDate.value + 'T00:00');
+            taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value, dueDate);
+        } else {
+            taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value);
         }
 
-        console.log(taskToAdd)
+
+
+        if (projectSelect) {
+            addTaskToProject(projectSelect.value, taskToAdd);
+        } else {
+            addTaskToProject(undefined, taskToAdd);
+        }
+
         addTaskForm.reset();
         addTaskDialog.close();
     }
