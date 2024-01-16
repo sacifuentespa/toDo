@@ -15,8 +15,6 @@ const taskForm = function () {
     const cancelTaskAdditionButton = document.createElement('button');
     const addTaskButton = document.querySelector('#buttonAddTask');
 
-
-
     addTaskDialog.id = "dialogAddTask"
 
     addTaskDialog.appendChild(addTaskForm);
@@ -32,7 +30,6 @@ const taskForm = function () {
     inputTitleTask.setAttribute("required", "");
 
     addTaskForm.appendChild(inputTitleTask);
-
 
     inputTaskDescription.type = "text";
     inputTaskDescription.id = "inputTaskDescription";
@@ -110,7 +107,6 @@ const taskForm = function () {
         addTaskDialog.close();
     })
 
-
     addTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         projects = loadDataFromLocalStorage();
@@ -124,8 +120,6 @@ const taskForm = function () {
         } else {
             taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value);
         }
-
-
 
         if (projectSelect) {
             addTaskToProject(projectSelect.value, taskToAdd);

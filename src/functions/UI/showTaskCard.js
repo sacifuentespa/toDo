@@ -1,7 +1,7 @@
-import {loadDataFromLocalStorage} from '../functionalities/projectController.js';
-
-
-const showProject = function(name){
+const taskCard = function(task){
+    
+    //waiting for implementation of specific logic for showing taskCards
+    /*
     const projects = loadDataFromLocalStorage();
     const mainContent = document.querySelector('.mainContent');
     mainContent.innerHTML = '';
@@ -13,7 +13,7 @@ const showProject = function(name){
     const projectToShow = projects.find(project => project.name === name);
     const h2 = document.createElement('h2');
     h2.textContent = projectToShow.name
-    projectContentDiv.appendChild(h2);
+    projectContentDiv.appendChild(h2);*/
 }
 
-export default showProject;
+export default taskCard;
