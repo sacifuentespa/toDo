@@ -22,6 +22,8 @@ const projectForm = function () {
     inputNameProject.type = "text";
     inputNameProject.id = "inputNameProject";
     inputNameProject.placeholder = "Project title";
+    inputNameProject.maxLength = "25";
+    inputNameProject.setAttribute("required", "");
 
     addProjectForm.appendChild(inputNameProject);
 
@@ -41,7 +43,7 @@ const projectForm = function () {
         addProjectDialog.close();
     })
 
-    projectAddButtonFinal.addEventListener('click', (e) => {
+    addProjectForm.addEventListener('submit', (e) => {
         e.preventDefault();
         createProject(inputNameProject.value);
 

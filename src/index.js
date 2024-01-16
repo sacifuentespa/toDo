@@ -3,7 +3,8 @@ import './styles/style.css';
 import home from './functions/UI/home.js';
 import { projects, Project, createProject, addTaskToProject } from './functions/functionalities/projectController.js';
 import addProjectUI from './functions/UI/addProjectUI.js';
-
+import Task from './functions/functionalities/tasksController.js';
+import addTaskUI from './functions/UI/addTaskUI.js';
 home();
 
 
@@ -13,4 +14,4 @@ buttonAddProject.addEventListener("click",()=>{
 })
 
 const buttonAddTask = document.querySelector('#buttonAddTask');
-buttonAddTask.addEventListener("click",()=>console.log(projects));
+buttonAddTask.addEventListener("click",()=>addTaskUI());

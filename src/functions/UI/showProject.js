@@ -1,6 +1,8 @@
-import {projects} from '../functionalities/projectController.js';
+import {loadDataFromLocalStorage} from '../functionalities/projectController.js';
+
 
 const showProject = function(name){
+    const projects = loadDataFromLocalStorage();
     const mainContent = document.querySelector('.mainContent');
     mainContent.innerHTML = '';
     const projectToShow = projects.find(project => project.name === name);
