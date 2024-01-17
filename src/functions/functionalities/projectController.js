@@ -19,6 +19,14 @@ function addTaskToProject(projectToAddTask = "General Project", task) {
     saveDataToLocalStorage();
 }
 
+function removeTaskFromProject(projectTitle, taskTitle){
+    const parentProjectRemovedTask = projects.find(project => project.name === projectTitle);
+    parentProjectRemovedTask.projectTasks = parentProjectRemovedTask.projectTasks.filter((task) => task.title !== taskTitle);
+    saveDataToLocalStorage();
+}
+
+
+//From localStorage documentation MDN
 function storageAvailable(type) {
     let storage;
     try {
@@ -46,7 +54,7 @@ function storageAvailable(type) {
     }
 }
 
-createProject("General Project");
+//localStorage functions
 
 function saveDataToLocalStorage() {
     if (storageAvailable("localStorage")) {
@@ -64,4 +72,4 @@ function loadDataFromLocalStorage() {
   }
 
 
-module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage,loadDataFromLocalStorage }
+module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage,loadDataFromLocalStorage, removeTaskFromProject}

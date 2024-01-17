@@ -15,6 +15,8 @@ const taskForm = function () {
     const cancelTaskAdditionButton = document.createElement('button');
     const addTaskButton = document.querySelector('#buttonAddTask');
 
+    projects = loadDataFromLocalStorage();
+
     addTaskDialog.id = "dialogAddTask"
 
     addTaskDialog.appendChild(addTaskForm);
@@ -64,7 +66,7 @@ const taskForm = function () {
 
     if (projects.length > 1) {
 
-        projects = loadDataFromLocalStorage();
+        
         const labelProjectOption = document.createElement('label');
         addTaskForm.appendChild(labelProjectOption);
         labelTaskPriority.setAttribute('for', "projectOption");
@@ -111,9 +113,10 @@ const taskForm = function () {
         e.preventDefault();
         projects = loadDataFromLocalStorage();
         // here comes the specific logic for tasks
-        const projectSelect = document.querySelector('#projectOption');
+        const projectSelect = addTaskForm.querySelector('#projectOption');
+        
         let taskToAdd = '';
-
+        
         if (inputTaskDueDate.value) {
             const dueDate = new Date(inputTaskDueDate.value + 'T00:00');
             taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value, dueDate);
@@ -122,6 +125,8 @@ const taskForm = function () {
         }
 
         if (projectSelect) {
+            console.log(projectSelect.value);
+            taskToAdd.parentProject = projectSelect.value;
             addTaskToProject(projectSelect.value, taskToAdd);
         } else {
             addTaskToProject(undefined, taskToAdd);

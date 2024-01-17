@@ -23,12 +23,7 @@ const showAllTasks = function () {
             });
         }
     })
-    /*if(projectToShow.projectTasks.length > 0){
-        projectToShow.projectTasks.forEach((task) => {
-            const taskCard = showTaskCard(task);
-            projectContentDiv.appendChild(taskCard);
-        });
-    };*/
+
 }
 
 export default showAllTasks;

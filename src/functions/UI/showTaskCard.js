@@ -1,3 +1,5 @@
+import { removeTaskFromProject } from "../functionalities/projectController";
+
 const taskCard = function(task){
     
     //waiting for implementation of specific logic for showing taskCards
@@ -27,6 +29,10 @@ const taskCard = function(task){
     const buttonDeleteTaskCard = document.createElement('button');
     buttonDeleteTaskCard.textContent = "Delete task";
     divTaskCard.appendChild(buttonDeleteTaskCard);
+
+    buttonDeleteTaskCard.addEventListener('click', ()=>{
+        removeTaskFromProject(task.parentProject, task.title);
+    })
 
     return divTaskCard;
 }

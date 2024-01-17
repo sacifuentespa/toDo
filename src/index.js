@@ -8,7 +8,7 @@ import addTaskUI from './functions/UI/addTaskUI.js';
 import showAllTasks from './functions/UI/showAllTasks.js';
 
 home();
-
+createProject("General Project");
 const buttonAddProject = document.querySelector('#buttonAddProject');
 buttonAddProject.addEventListener("click",()=>{
     addProjectUI();
