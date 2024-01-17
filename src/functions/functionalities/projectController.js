@@ -25,6 +25,12 @@ function removeTaskFromProject(projectTitle, taskTitle){
     saveDataToLocalStorage();
 }
 
+function removeProject(projectTitle){
+    const projectIndex = projects.findIndex(project => project.name === projectTitle);
+    projects.splice(projectIndex,1);
+    saveDataToLocalStorage();
+};
+
 
 //From localStorage documentation MDN
 function storageAvailable(type) {
@@ -72,4 +78,4 @@ function loadDataFromLocalStorage() {
   }
 
 
-module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage,loadDataFromLocalStorage, removeTaskFromProject}
+module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage,loadDataFromLocalStorage, removeTaskFromProject, removeProject}
