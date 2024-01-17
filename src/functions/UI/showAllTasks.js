@@ -1,7 +1,8 @@
-import {loadDataFromLocalStorage} from '../functionalities/projectController.js';
+import { loadDataFromLocalStorage } from '../functionalities/projectController.js';
 import showTaskCard from './showTaskCard.js';
 
-const showProject = function(name){
+const showAllTasks = function () {
+
     const projects = loadDataFromLocalStorage();
     const mainContent = document.querySelector('.mainContent');
     mainContent.innerHTML = '';
@@ -9,19 +10,25 @@ const showProject = function(name){
     const projectContentDiv = document.createElement('div');
     projectContentDiv.classList.add('projectContentDiv');
     mainContent.appendChild(projectContentDiv);
-    
-    const projectToShow = projects.find(project => project.name === name);
+
     const h2 = document.createElement('h2');
-    h2.textContent = projectToShow.name
+    h2.textContent = "All tasks";
     projectContentDiv.appendChild(h2);
 
-    if(projectToShow.projectTasks.length > 0){
+    projects.forEach(project => {
+        if (project.projectTasks.length > 0) {
+            project.projectTasks.forEach((task) => {
+                const taskCard = showTaskCard(task);
+                projectContentDiv.appendChild(taskCard);
+            });
+        }
+    })
+    /*if(projectToShow.projectTasks.length > 0){
         projectToShow.projectTasks.forEach((task) => {
             const taskCard = showTaskCard(task);
             projectContentDiv.appendChild(taskCard);
         });
-        
-    };
+    };*/
 }
 
-export default showProject;
+export default showAllTasks;

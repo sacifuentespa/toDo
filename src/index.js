@@ -5,8 +5,9 @@ import { projects, Project, createProject, addTaskToProject } from './functions/
 import addProjectUI from './functions/UI/addProjectUI.js';
 import Task from './functions/functionalities/tasksController.js';
 import addTaskUI from './functions/UI/addTaskUI.js';
-home();
+import showAllTasks from './functions/UI/showAllTasks.js';
 
+home();
 
 const buttonAddProject = document.querySelector('#buttonAddProject');
 buttonAddProject.addEventListener("click",()=>{
@@ -15,3 +16,6 @@ buttonAddProject.addEventListener("click",()=>{
 
 const buttonAddTask = document.querySelector('#buttonAddTask');
 buttonAddTask.addEventListener("click",()=>addTaskUI());
+
+const buttonAll = document.querySelector('#buttonAll');
+buttonAll.addEventListener("click", ()=> showAllTasks());
