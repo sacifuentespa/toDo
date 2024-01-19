@@ -1,4 +1,5 @@
 import {loadDataFromLocalStorage, removeProject} from '../functionalities/projectController.js';
+import editProjectForm from './editProjectUI.js';
 import showTaskCard from './showTaskCard.js';
 
 const showProject = function(name){
@@ -15,6 +16,16 @@ const showProject = function(name){
     h2.textContent = projectToShow.name
     projectContentDiv.appendChild(h2);
 
+    const editProjectButton = document.createElement('button');
+    editProjectButton.classList.add('editProjectButton')
+    editProjectButton.textContent = "Edit project";
+    projectContentDiv.appendChild(editProjectButton);
+    editProjectButton.addEventListener('click', ()=>{
+        loadDataFromLocalStorage();
+        editProjectForm()
+        loadDataFromLocalStorage();
+    })
+
     const deleteProjectButton = document.createElement('button');
     deleteProjectButton.classList.add('deleteProjectButton')
     deleteProjectButton.textContent = "Delete project";
@@ -25,6 +36,7 @@ const showProject = function(name){
         removeProject(projectToShow.name);
         mainContent.innerHTML = '';
     })
+
 
 
 

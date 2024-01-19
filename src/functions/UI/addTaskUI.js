@@ -132,6 +132,14 @@ const taskForm = function () {
             addTaskToProject(undefined, taskToAdd);
         }
 
+        /*const h2 = document.querySelector('h2');
+
+        if(h2){
+            if(h2.textContent === "All tasks"){
+
+            }
+        }*/
+
         addTaskForm.reset();
         addTaskDialog.close();
     }

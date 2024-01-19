@@ -17,11 +17,11 @@ function createProject(name) {
 function editProject(originalName, finalName) {
     const projectToEdit = projects.find(project => project.name === originalName);
     projectToEdit.name = finalName;
-    if (projectToEdit.projectTasks.length > 0) {
+    /*if (projectToEdit.projectTasks.length > 0) {
         for (let i = 0; i < projectToEdit.projectTasks.length; i++) {
             projectToEdit.projectTasks[i].aprentProject = finalName;
         }
-    }
+    }*/
     saveDataToLocalStorage();
 }
 
@@ -90,4 +90,4 @@ function loadDataFromLocalStorage() {
 }
 
 
-module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject }
+module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject, editProject }
