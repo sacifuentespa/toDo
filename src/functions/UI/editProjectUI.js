@@ -49,8 +49,9 @@ const editProjectForm = function (project) {
         const oldProjectName = document.querySelector('h2');
         
         editProject(oldProjectName.textContent, inputNameProject.value);
-        const buttonProject = document.querySelector(`#${oldProjectName.textContent}`)
-        buttonProject.id = inputNameProject.value;
+        const buttonProject = document.querySelector(`#${oldProjectName.textContent.replace(/ /g,'-')}`)
+
+        buttonProject.id = inputNameProject.value.replace(/ /g,'-');
         buttonProject.textContent = inputNameProject.value;
         oldProjectName.textContent = inputNameProject.value;
 

@@ -34,14 +34,11 @@ const showProject = function(name){
     deleteProjectButton.textContent = "Delete project";
     projectContentDiv.appendChild(deleteProjectButton);
     deleteProjectButton.addEventListener('click', () => {
-        const buttonProjectDeleted = document.querySelector(`#${projectToShow.name}`);
+        const buttonProjectDeleted = document.querySelector(`#${projectToShow.name.replace(/ /g,'-')}`);
         buttonProjectDeleted.remove();
         removeProject(projectToShow.name);
         mainContent.innerHTML = '';
     })
-
-
-
 
     if(projectToShow.projectTasks.length > 0){
         projectToShow.projectTasks.forEach((task) => {

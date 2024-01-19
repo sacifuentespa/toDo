@@ -50,10 +50,10 @@ const projectForm = function () {
 
         const buttonProject = document.createElement('button');
         buttonProject.textContent = inputNameProject.value;
-        buttonProject.id = inputNameProject.value;
+        buttonProject.id = inputNameProject.value.replace(/ /g,'-');
 
         sidebarDiv.appendChild(buttonProject);
-        buttonProject.addEventListener('click', () => showProject(buttonProject.id));
+        buttonProject.addEventListener('click', () => showProject(buttonProject.textContent));
 
         addProjectForm.reset();
         addProjectDialog.close();
