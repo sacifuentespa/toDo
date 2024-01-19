@@ -1,4 +1,6 @@
 import { removeTaskFromProject } from "../functionalities/projectController";
+import { Task } from "../functionalities/tasksController";
+import editTaskForm from "./editTaskUI";
 
 const taskCard = function(task){
     
@@ -29,6 +31,10 @@ const taskCard = function(task){
     const buttonDeleteTaskCard = document.createElement('button');
     buttonDeleteTaskCard.textContent = "Delete task";
     divTaskCard.appendChild(buttonDeleteTaskCard);
+
+    buttonEditTaskCard.addEventListener('click',()=>{
+        editTaskForm(task);
+    })
 
     buttonDeleteTaskCard.addEventListener('click', ()=>{
         removeTaskFromProject(task.parentProject, task.title);

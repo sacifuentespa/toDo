@@ -1,7 +1,7 @@
 import { editProject } from '../functionalities/projectController.js';
-import showProject from './showProject.js';
 
-const editProjectForm = function () {
+
+const editProjectForm = function (project) {
     const sidebarDiv = document.querySelector('.sidebarDiv');
     const editProjectDialog = document.createElement('dialog')
     const editProjectForm = document.createElement('form');
@@ -23,6 +23,7 @@ const editProjectForm = function () {
     inputNameProject.id = "inputNameProject";
     inputNameProject.placeholder = "Project title";
     inputNameProject.maxLength = "25";
+    inputNameProject.value = project.name;
     inputNameProject.setAttribute("required", "");
 
     editProjectForm.appendChild(inputNameProject);

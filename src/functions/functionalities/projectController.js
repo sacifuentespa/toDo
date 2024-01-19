@@ -17,11 +17,29 @@ function createProject(name) {
 function editProject(originalName, finalName) {
     const projectToEdit = projects.find(project => project.name === originalName);
     projectToEdit.name = finalName;
-    /*if (projectToEdit.projectTasks.length > 0) {
+    if (projectToEdit.projectTasks.length > 0) {
         for (let i = 0; i < projectToEdit.projectTasks.length; i++) {
-            projectToEdit.projectTasks[i].aprentProject = finalName;
+            projectToEdit.projectTasks[i].parentProject = finalName;
         }
-    }*/
+    }
+    saveDataToLocalStorage();
+}
+
+function editTask(originalProjectTitle, taskTitle, task){
+    const parentProjectEditedTask = projects.find(project => project.name === originalProjectTitle);
+    console.log(parentProjectEditedTask);
+    const taskToEdit = parentProjectEditedTask.projectTasks.find(editedTask => editedTask.title === taskTitle);
+
+    taskToEdit.title = task.title;
+    taskToEdit.description = task.description;
+    taskToEdit.priority = task.priority;
+    taskToEdit.date = task.date;
+    taskToEdit.parentProject = task.parentProject;
+
+    if(originalProjectTitle !== task.parentProject){
+        removeTaskFromProject(originalProjectTitle,taskToEdit.title);
+        addTaskToProject(task.parentProject, task);
+    }
     saveDataToLocalStorage();
 }
 
@@ -90,4 +108,4 @@ function loadDataFromLocalStorage() {
 }
 
 
-module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject, editProject }
+module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject, editProject, editTask}

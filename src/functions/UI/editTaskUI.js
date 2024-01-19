@@ -1,50 +1,54 @@
-import { projects, addTaskToProject, loadDataFromLocalStorage } from '../functionalities/projectController.js';
+import { projects, editTask, loadDataFromLocalStorage } from '../functionalities/projectController.js';
 import { Task } from '../functionalities/tasksController.js';
 
 
-const taskForm = function () {
+const editTaskForm = function (task) {
     const sidebarDiv = document.querySelector('.sidebarDiv');
-    const addTaskDialog = document.createElement('dialog')
-    const addTaskForm = document.createElement('form');
+    const editTaskDialog = document.createElement('dialog')
+    const editTaskForm = document.createElement('form');
     const inputTitleTask = document.createElement('input');
     const inputTaskDescription = document.createElement('input');
     const inputTaskPriority = document.createElement('select');
     const inputTaskDueDate = document.createElement('input');
-    const taskAddButtonFinal = document.createElement('button');
-    const cancelTaskAdditionButton = document.createElement('button');
-    const addTaskButton = document.querySelector('#buttonAddTask');
+    const taskEditButtonFinal = document.createElement('button');
+    const cancelTaskEditionButton = document.createElement('button');
+    const editTaskButton = document.querySelector('#buttonEditTask');
 
     projects = loadDataFromLocalStorage();
 
-    addTaskDialog.id = "dialogAddTask"
+    let originalTask = task;
 
-    addTaskDialog.appendChild(addTaskForm);
+    editTaskDialog.id = "dialogEditTask"
 
-    addTaskForm.id = "addTaskForm";
-    addTaskForm.action = "/addTask";
-    addTaskForm.method = "post";
+    editTaskDialog.appendChild(editTaskForm);
+
+    editTaskForm.id = "editTaskForm";
+    editTaskForm.action = "/addTask";
+    editTaskForm.method = "post";
 
     inputTitleTask.type = "text";
     inputTitleTask.id = "inputTitleTask";
     inputTitleTask.placeholder = "Task title";
     inputTitleTask.maxLength = "25"
     inputTitleTask.setAttribute("required", "");
+    inputTitleTask.value = originalTask.title;
 
-    addTaskForm.appendChild(inputTitleTask);
+    editTaskForm.appendChild(inputTitleTask);
 
     inputTaskDescription.type = "text";
     inputTaskDescription.id = "inputTaskDescription";
     inputTaskDescription.placeholder = "Task description";
     inputTaskDescription.maxLength = "100"
+    inputTaskDescription.value = originalTask.description;
 
-    addTaskForm.appendChild(inputTaskDescription);
+    editTaskForm.appendChild(inputTaskDescription);
 
     const labelTaskPriority = document.createElement('label');
-    addTaskForm.appendChild(labelTaskPriority);
+    editTaskForm.appendChild(labelTaskPriority);
 
     inputTaskPriority.id = "inputTaskPriority";
     labelTaskPriority.setAttribute('for', "inputTaskPriority");
-    labelTaskPriority.textContent = "Add Priority";
+    labelTaskPriority.textContent = "Edit Priority";
 
     const optionHigh = document.createElement('option');
     inputTaskPriority.appendChild(optionHigh);
@@ -61,13 +65,13 @@ const taskForm = function () {
     optionLow.value = "Low";
     optionLow.textContent = "Low";
 
-    addTaskForm.appendChild(inputTaskPriority);
+    editTaskForm.appendChild(inputTaskPriority);
+    inputTaskPriority.value = originalTask.priority;
 
     if (projects.length > 1) {
 
-        
         const labelProjectOption = document.createElement('label');
-        addTaskForm.appendChild(labelProjectOption);
+        editTaskForm.appendChild(labelProjectOption);
         labelProjectOption.setAttribute('for', "projectOption");
         labelProjectOption.textContent = "Related Project";
 
@@ -86,60 +90,59 @@ const taskForm = function () {
         optionProject.value = projects[0].name;
         optionProject.textContent = "None";
         projectSelect.appendChild(optionProject);
-        addTaskForm.appendChild(projectSelect);
+        editTaskForm.appendChild(projectSelect);
     }
 
     inputTaskDueDate.type = "date";
-    addTaskForm.appendChild(inputTaskDueDate)
+    editTaskForm.appendChild(inputTaskDueDate)
+    inputTaskDueDate.value = originalTask.date;
 
-    taskAddButtonFinal.type = "submit";
-    taskAddButtonFinal.textContent = "Add";
+    taskEditButtonFinal.type = "submit";
+    taskEditButtonFinal.textContent = "Edit";
 
-    cancelTaskAdditionButton.type = "button";
-    cancelTaskAdditionButton.textContent = "Cancel";
+    cancelTaskEditionButton.type = "button";
+    cancelTaskEditionButton.textContent = "Cancel";
 
-    addTaskForm.appendChild(taskAddButtonFinal);
-    addTaskForm.appendChild(cancelTaskAdditionButton);
+    editTaskForm.appendChild(taskEditButtonFinal);
+    editTaskForm.appendChild(cancelTaskEditionButton);
 
-    sidebarDiv.insertBefore(addTaskDialog, addTaskButton);
-    addTaskDialog.showModal();
+    sidebarDiv.insertBefore(editTaskDialog, editTaskButton);
+    editTaskDialog.showModal();
 
-    cancelTaskAdditionButton.addEventListener('click', () => {
-        addTaskDialog.close();
-    })
+    
 
-    addTaskForm.addEventListener('submit', (e) => {
+    cancelTaskEditionButton.addEventListener('click', () => {
+        editTaskDialog.close();
+    });
+
+    editTaskForm.addEventListener('submit', (e) => {
         e.preventDefault();
         projects = loadDataFromLocalStorage();
         // here comes the specific logic for tasks
-        const projectSelect = addTaskForm.querySelector('#projectOption');
+        const projectSelect = editTaskForm.querySelector('#projectOption');
         
-        let taskToAdd = '';
-        
+
+        let taskToEdit = '';
+
         if (inputTaskDueDate.value) {
             const dueDate = new Date(inputTaskDueDate.value + 'T00:00');
-            taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value, dueDate);
+            taskToEdit = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value, dueDate);
         } else {
-            taskToAdd = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value);
+            taskToEdit = new Task(inputTitleTask.value, inputTaskDescription.value, inputTaskPriority.value);
         }
 
-        if (projectSelect) {
-            console.log(projectSelect.value);
-            taskToAdd.parentProject = projectSelect.value;
-            addTaskToProject(projectSelect.value, taskToAdd);
-            alert("Click on your project or desired view button again to see the tasks refreshed")
-        } else {
-            addTaskToProject(undefined, taskToAdd);
-            alert("Click on desired view button again to see the tasks refreshed")  
+        if(projectSelect){
+            taskToEdit.parentProject = projectSelect.value;
         }
 
+        editTask(originalTask.parentProject, originalTask.title, taskToEdit);
+        alert("Click on your project or desired view button again to see the tasks refreshed")
 
-
-        addTaskForm.reset();
-        addTaskDialog.close();
+        editTaskForm.reset();
+        editTaskDialog.close();
     }
 
     )
 }
 
-export default taskForm;
+export default editTaskForm;

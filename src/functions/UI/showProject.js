@@ -11,7 +11,7 @@ const showProject = function(name){
     projectContentDiv.classList.add('projectContentDiv');
     mainContent.appendChild(projectContentDiv);
     
-    const projectToShow = projects.find(project => project.name === name);
+    let projectToShow = projects.find(project => project.name === name);
     const h2 = document.createElement('h2');
     h2.textContent = projectToShow.name
     projectContentDiv.appendChild(h2);
@@ -21,8 +21,7 @@ const showProject = function(name){
     editProjectButton.textContent = "Edit project";
     projectContentDiv.appendChild(editProjectButton);
     editProjectButton.addEventListener('click', ()=>{
-        loadDataFromLocalStorage();
-        editProjectForm()
+        editProjectForm(projectToShow);
         loadDataFromLocalStorage();
     })
 
