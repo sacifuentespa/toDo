@@ -3,7 +3,7 @@ import editProjectForm from './editProjectUI.js';
 import showTaskCard from './showTaskCard.js';
 
 const showProject = function(name){
-    const projects = loadDataFromLocalStorage();
+    let projects = loadDataFromLocalStorage();
     const mainContent = document.querySelector('.mainContent');
     mainContent.innerHTML = '';
 
@@ -11,7 +11,10 @@ const showProject = function(name){
     projectContentDiv.classList.add('projectContentDiv');
     mainContent.appendChild(projectContentDiv);
     
-    let projectToShow = projects.find(project => project.name === name);
+    
+    const projectIndex = projects.findIndex(project => project.name === name);
+    let projectToShow = projects[projectIndex];
+
     const h2 = document.createElement('h2');
     h2.textContent = projectToShow.name
     projectContentDiv.appendChild(h2);
@@ -22,7 +25,8 @@ const showProject = function(name){
     projectContentDiv.appendChild(editProjectButton);
     editProjectButton.addEventListener('click', ()=>{
         editProjectForm(projectToShow);
-        loadDataFromLocalStorage();
+        projects = loadDataFromLocalStorage();
+        projectToShow = projects[projectIndex];
     })
 
     const deleteProjectButton = document.createElement('button');
