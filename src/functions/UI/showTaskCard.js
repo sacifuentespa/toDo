@@ -32,6 +32,7 @@ const taskCard = function(task){
 
     buttonDeleteTaskCard.addEventListener('click', ()=>{
         removeTaskFromProject(task.parentProject, task.title);
+        divTaskCard.remove();
     })
 
     return divTaskCard;

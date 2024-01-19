@@ -13,21 +13,33 @@ function createProject(name) {
     saveDataToLocalStorage();
 }
 
+
+function editProject(originalName, finalName) {
+    const projectToEdit = projects.find(project => project.name === originalName);
+    projectToEdit.name = finalName;
+    if (projectToEdit.projectTasks.length > 0) {
+        for (let i = 0; i < projectToEdit.projectTasks.length; i++) {
+            projectToEdit.projectTasks[i].aprentProject = finalName;
+        }
+    }
+    saveDataToLocalStorage();
+}
+
 function addTaskToProject(projectToAddTask = "General Project", task) {
     const projectToAdd = projects.find(project => project.name === projectToAddTask);
     projectToAdd.projectTasks.push(task);
     saveDataToLocalStorage();
 }
 
-function removeTaskFromProject(projectTitle, taskTitle){
+function removeTaskFromProject(projectTitle, taskTitle) {
     const parentProjectRemovedTask = projects.find(project => project.name === projectTitle);
     parentProjectRemovedTask.projectTasks = parentProjectRemovedTask.projectTasks.filter((task) => task.title !== taskTitle);
     saveDataToLocalStorage();
 }
 
-function removeProject(projectTitle){
+function removeProject(projectTitle) {
     const projectIndex = projects.findIndex(project => project.name === projectTitle);
-    projects.splice(projectIndex,1);
+    projects.splice(projectIndex, 1);
     saveDataToLocalStorage();
 };
 
@@ -72,10 +84,10 @@ function saveDataToLocalStorage() {
 function loadDataFromLocalStorage() {
     const savedProjects = localStorage.getItem('projects');
     if (savedProjects) {
-      projects = JSON.parse(savedProjects);
+        projects = JSON.parse(savedProjects);
     }
     return projects;
-  }
+}
 
 
-module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage,loadDataFromLocalStorage, removeTaskFromProject, removeProject}
+module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject }
