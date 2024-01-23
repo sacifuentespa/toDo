@@ -1,7 +1,7 @@
 import './styles/normalize.css';
 import './styles/style.css';
 import home from './functions/UI/home.js';
-import {  Project, createProject, addTaskToProject, loadDataFromLocalStorage } from './functions/functionalities/projectController.js';
+import {  Project, createProject, addTaskToProject, loadDataFromLocalStorage, saveDataToLocalStorage } from './functions/functionalities/projectController.js';
 import addProjectUI from './functions/UI/addProjectUI.js';
 import addTaskUI from './functions/UI/addTaskUI.js';
 import showAllTasks from './functions/UI/showAllTasks.js';
@@ -9,9 +9,12 @@ import showToday from './functions/UI/showToday.js';
 import showThisMonth from './functions/UI/showMonth.js';
 import showThisWeek from './functions/UI/showWeek.js';
 
-home();
 
+home();
 let projects = loadDataFromLocalStorage() || [new Project("General Project")];
+saveDataToLocalStorage()
+
+
 
 const buttonAddProject = document.querySelector('#buttonAddProject');
 buttonAddProject.addEventListener("click",()=>{

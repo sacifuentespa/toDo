@@ -1,3 +1,4 @@
+let projects = loadDataFromLocalStorage();
 
 class Project {
     constructor(name) {
@@ -12,6 +13,9 @@ function createProject(name) {
     saveDataToLocalStorage();
 }
 
+if(projects.length <1){
+    createProject("General Project");
+}
 
 function editProject(originalName, finalName) {
     const projectToEdit = projects.find(project => project.name === originalName);
@@ -101,10 +105,11 @@ function saveDataToLocalStorage() {
 function loadDataFromLocalStorage() {
     const savedProjects = localStorage.getItem('projects');
     if (savedProjects) {
-        projects = JSON.parse(savedProjects);
+        return JSON.parse(savedProjects);
     }
-    return projects;
+    return [];
 }
+
 
 
 module.exports = { Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject, editProject, editTask}
