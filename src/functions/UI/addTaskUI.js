@@ -124,7 +124,7 @@ const taskForm = function () {
         }
 
         if (projectSelect) {
-            console.log(projectSelect.value);
+            
             taskToAdd.parentProject = projectSelect.value;
             addTaskToProject(projectSelect.value, taskToAdd);
             alert("Click on your project or desired view button again to see the tasks refreshed")
