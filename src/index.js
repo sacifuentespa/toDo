@@ -10,7 +10,7 @@ import showThisMonth from './functions/UI/showMonth.js';
 import showThisWeek from './functions/UI/showWeek.js';
 
 home();
-createProject("General Project");
+
 const buttonAddProject = document.querySelector('#buttonAddProject');
 buttonAddProject.addEventListener("click",()=>{
     addProjectUI();
