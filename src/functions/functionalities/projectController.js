@@ -1,4 +1,3 @@
-let projects = []
 
 class Project {
     constructor(name) {
@@ -108,4 +107,4 @@ function loadDataFromLocalStorage() {
 }
 
 
-module.exports = { projects, Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject, editProject, editTask}
+module.exports = { Project, createProject, addTaskToProject, saveDataToLocalStorage, loadDataFromLocalStorage, removeTaskFromProject, removeProject, editProject, editTask}
